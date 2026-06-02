@@ -62,6 +62,19 @@ public class Traversal {
         printGreaterThan(current.left, threshold);
         printGreaterThan(current.right, threshold);
      }
+
+     public static int countNodes(TreeNode<?> current) {
+      //bool? if true:else
+      return current == null ? 0 : 1 + countNodes(current.left) + countNodes(current.right);
+      // if (current == null) return 0;
+      // //count of all nodes in the left subtree
+
+      // int leftCount = countNodes(current.left);
+      // int rightCount = countNodes(current.right);
+      // int totalCount = leftCount + rightCount + 1;
+      // return totalCount;
+
+     }
      
   
 }
