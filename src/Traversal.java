@@ -1,4 +1,7 @@
 // import javax.swing.tree.TreeCellRenderer;
+import java.util.Stack;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Traversal {
   public static void main(String[] args) {
@@ -23,10 +26,21 @@ public class Traversal {
 
     stringRoot.right = new TreeNode<>("sfd");
 
+    TreeNode<Integer> megaRoot = new TreeNode<>(1);
+
+TreeNode<Integer> current = megaRoot;
+    for(int i = 1; i < 100_001; i++) {
+      current.right = new TreeNode<Integer>(1);
+      current = current.right;
+
+    }
+
+
                 
-    preorder(stringRoot);
-    postorder(root);
-    printGreaterThan(root, 1);
+    //preorder(root);
+    //postorder(root);
+    //printGreaterThan(root, 1);
+    preorderIterative(root);
   }
   public static void preorder(TreeNode<?> current) {
     if (current == null) return;
@@ -34,6 +48,38 @@ public class Traversal {
 
     preorder(current.left);
     preorder(current.right);
+  }
+
+  public static void preorderIterative(TreeNode<?> root) {
+    Stack<TreeNode<?>> stack = new Stack<>();
+  stack.push(root);
+    while(!stack.isEmpty()) {
+      //do something
+      TreeNode<?> current = stack.pop();
+      if(current == null) continue;
+      System.out.println(current.value);
+      stack.push(current.right);
+      stack.push(current.left);
+    }
+
+    
+  }
+
+  public static void levelOrder(TreeNode<?> root) {
+
+    Queue<TreeNode<?>> queue = new LinkedList<>(); 
+      queue.offer(root);
+
+      while(!queue.isEmpty()) {
+        TreeNode<?> current =  queue.remove();
+        if(current==null) continue;
+        System.out.println(current.value);
+        queue.offer(current.left);
+        queue.offer(current.right);
+      }
+
+      
+    };
   }
 
   public static <E> void postorder(TreeNode<E> current) {
